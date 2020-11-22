@@ -50,6 +50,7 @@
             <CFormControl>
               <CFormLabel for="message"> Message </CFormLabel>
               <CTextarea
+                id="message"
                 v-model="form.message"
                 placeholder="Type your message"
               />
@@ -86,6 +87,7 @@
     CInput,
     CFormHelperText
   } from '@chakra-ui/vue'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -134,14 +136,8 @@ export default {
   },
   methods: {
     async sendContactToLambdaFunction () {
-      // const headers = {
-      //   headers: {
-      //     'content-type': 'application/json',
-      //   },
-      // }
-      // this.$axios.defaults.headers.post.Accepts = 'application/json'
       try {
-        const response = await this.$axios.$post('/.netlify/functions/contact-mail', {
+        const response = await axios.post('/.netlify/functions/contact-mail', {
           name: this.form.name,
           email: this.form.email,
           message: this.form.message
@@ -149,7 +145,7 @@ export default {
 
         this.$toast({
           title: 'Mail sent',
-          description: response,
+          // description: response,
           status: 'success',
           duration: 10000,
           isClosable: true
@@ -159,13 +155,13 @@ export default {
         this.form.email = ''
         this.form.message = ''
       } catch (error) {
-        this.$toast({
-          title: 'An error occured',
-          description: error,
-          status: 'error',
-          duration: 10000,
-          isClosable: true
-        })
+          this.$toast({
+            title: 'An error occured',
+            // description: error,
+            status: 'error',
+            duration: 10000,
+            isClosable: true
+          })
       }
     }
   }
