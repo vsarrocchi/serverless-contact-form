@@ -139,7 +139,7 @@ export default {
           'content-type': 'application/json',
         },
       }
-      axios.defaults.headers.post.Accepts = 'application/json'
+      this.$axios.defaults.headers.post.Accepts = 'application/json'
       try {
         const response = await this.$axios.$post('/.netlify/functions/contact-mail', {
           name: this.form.name,
