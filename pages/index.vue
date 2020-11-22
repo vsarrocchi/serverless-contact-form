@@ -134,18 +134,18 @@ export default {
   },
   methods: {
     async sendContactToLambdaFunction () {
-      const headers = {
-        headers: {
-          'content-type': 'application/json',
-        },
-      }
-      this.$axios.defaults.headers.post.Accepts = 'application/json'
+      // const headers = {
+      //   headers: {
+      //     'content-type': 'application/json',
+      //   },
+      // }
+      // this.$axios.defaults.headers.post.Accepts = 'application/json'
       try {
         const response = await this.$axios.$post('/.netlify/functions/contact-mail', {
           name: this.form.name,
           email: this.form.email,
           message: this.form.message
-        }, headers)
+        })
 
         this.$toast({
           title: 'Mail sent',
